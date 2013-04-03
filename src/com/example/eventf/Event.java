@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 public class Event {
+	int i;
 	
 	public String date;
 	public String data;
@@ -18,22 +19,38 @@ public class Event {
 	public String imageUrl;
 	
 
-public Event(String data,String date,String day,String month,String year,String place,String hours,String title,final String imageUrl){
-	
-	this.data=data;
-	this.day=day;
-	this.hours=hours;
-	this.place=place;
-	this.title=title;
-	this.month=month;
-	this.year=year;
-	this.date=date;
+	public void  setTime (String hours,String day, String month,String year,String date ){
+		
+		this.hours=hours;
+		this.day=day;
+		this.month=month;
+		this.year=year;
+		this.date=date;
+		
+	}
+
+	public void setData(String data){
+		
+	this.data=data;	
+	}
+
+	public void setPlace(String place){
+
+	this.place=place;	
+	}
+
+	public void setTitle(String title){
+		
+		this.title=title;
+		
+	}
+
+	public void setImageUrl(String imageUrl){
+
 	this.imageUrl=imageUrl;
-	
-	
-}
 
 
+	}
 
 
 

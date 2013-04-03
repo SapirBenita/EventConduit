@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar.LayoutParams;
+import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -41,7 +42,7 @@ import android.widget.TextView;
 public class FragmentEvent extends ListFragment {
 	private GetTweetsAsync mTask;
 	ArrayList<Event> events;
-	
+	OnEventSelectedListener mSelectIf;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -75,16 +76,16 @@ public class FragmentEvent extends ListFragment {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
 		
-		Intent launchingIntent = new Intent(getActivity(), DetailActivity.class);
+
+		Bundle eventData = new Bundle();
 		
-		launchingIntent.putExtra("Data", events.get(position).data);
-		launchingIntent.putExtra("Hours", events.get(position).hours);
-		launchingIntent.putExtra("Place", events.get(position).place);
-		launchingIntent.putExtra("Title", events.get(position).title);
-		launchingIntent.putExtra("Date", events.get(position).date);
-		launchingIntent.putExtra("Image", events.get(position).imageUrl);
+		eventData.putString("Data", events.get(position).data);
+		eventData.putString("Hours", events.get(position).hours);
+		eventData.putString("Place", events.get(position).place);
+		eventData.putString("Date", events.get(position).date);
+		eventData.putString("Image", events.get(position).imageUrl);
 		
-		startActivity(launchingIntent);
+		mSelectIf.onEventSelected(eventData);
 	}
 
 	// @Override
@@ -247,7 +248,13 @@ public class FragmentEvent extends ListFragment {
 				
 				place= place+"\n";
 				
-			    Event event = new Event(data,date,day,month,year,place, hours, title,imageUrl);
+				
+			    Event event = new Event();
+			    event.setData(data);
+			    event.setImageUrl(imageUrl);
+			    event.setPlace(place);
+			    event.setTitle(title);
+			    event.setTime(hours, day, month, year, date);
 			    events.add(event);
 
 			}
@@ -259,6 +266,23 @@ public class FragmentEvent extends ListFragment {
 
 		return events;
 
+	}
+
+	
+	
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		try {
+			mSelectIf = (OnEventSelectedListener) activity;
+		} catch (ClassCastException e) {
+			throw new ClassCastException(activity.toString()
+					+ " must implement DetailsFragmentDataIf");
+		}
+	}
+	
+	
+	public interface OnEventSelectedListener {
+		public void onEventSelected(Bundle eventData);
 	}
 
 }
