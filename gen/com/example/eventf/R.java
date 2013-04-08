@@ -50,13 +50,13 @@ public final class R {
         public static final int place=0x7f090009;
         public static final int textView1=0x7f09000f;
         public static final int title=0x7f090008;
-        public static final int titles=0x7f090000;
-        public static final int viewers=0x7f090001;
+        public static final int titles=0x7f090001;
+        public static final int viewers=0x7f090000;
         public static final int year=0x7f090005;
     }
     public static final class layout {
-        public static final int fragmenta=0x7f030000;
-        public static final int fragmentb=0x7f030001;
+        public static final int fragment_detail=0x7f030000;
+        public static final int fragment_event=0x7f030001;
         public static final int listitem=0x7f030002;
         public static final int viewer=0x7f030003;
     }
